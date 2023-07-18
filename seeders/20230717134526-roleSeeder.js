@@ -16,12 +16,6 @@ module.exports = {
         },
         {
           id: 2,
-          name: "Employee",
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-        {
-          id: 3,
           name: "Client",
           createdAt: new Date(),
           updatedAt: new Date(),
