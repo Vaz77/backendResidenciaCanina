@@ -50,14 +50,11 @@ dogController.updateDog = async (req, res) => {
   try {
     // Recojo los datos del body
     const body = req.body;
-    // Recojo la id del usuario del token. Si utilizo esto para encontrar a mi usuario aseguro que solo puedo editar MI perfil, del usuario que está logueado.
     const dogId = req.params.id;
     const userId = req.userId;
 
-    // Elimino del body los campos que sé que no quiero poder cambiar. De mi usuario no me interesa que nunca se pueda cambiar ni el email, ni la contraseña ni el nombre de usuario. Quizá luego crearía otro controlador únicamente para cambiar la contraseña.
     delete body.name;
     delete body.breed;
-
     // Utilizo el método findOne para asegurarme de que el perro que se va a actualizar pertenece al usuario que está realizando la solicitud.
     const dog = await Dog.findOne({
       where: {
