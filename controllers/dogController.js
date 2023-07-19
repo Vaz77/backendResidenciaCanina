@@ -97,4 +97,29 @@ dogController.updateDog = async (req, res) => {
   }
 };
 
+dogController.getAlldogs = async (req, res) => {
+  try {
+    // Quiero traerme todos los usuarios, por lo que utilizo directamente el método findAll sin ningún criterio concreto de búsqueda. El resultado lo almaceno en la variable users.
+    let dogs = await Dog.findAll({
+      // // Si quiero excluir algún campo, lo incluyo aquí
+      // attributes: {
+      //   exclude: ["password"],
+      // },
+      // // Si quiero incluir los datos de una tabla relacionada, también lo pongo aquí
+      // include: [{ model: Dog }],
+    });
+    // Devuelvo los datos al perro
+    res.json({
+      message: "Dogs found successfully",
+      data: dogs,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Dogs not found",
+      error: error,
+    });
+  }
+};
+
 module.exports = dogController;
