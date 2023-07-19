@@ -17,8 +17,10 @@ authController.register = async (req, res) => {
   try {
     // llamo al modelo con el método create del ORM. Esto va a crear un nuevo registro en la tabla, por lo que le tengo que indicar cada uno de los campos que tiene que rellenar. Le paso cada campo desde el body y, si quiero rellenar alguno de manera predeterminada, se lo puedo decir directamente.
     const newUser = await User.create({
-      username: body.username,
+      name: body.name,
+      surname: body.surname,
       email: body.email,
+      dni: body.dni,
       //   Le paso la contraseña encriptada en vez de la que me han pasado por el body
       password: newPass,
       //   Le asigno directamente el rol de usuario, no quiero que se puedan registrar administradores
