@@ -21,6 +21,7 @@ authController.register = async (req, res) => {
       surname: body.surname,
       email: body.email,
       dni: body.dni,
+      phone: body.phone,
       //   Le paso la contraseña encriptada en vez de la que me han pasado por el body
       password: newPass,
       //   Le asigno directamente el rol de usuario, no quiero que se puedan registrar administradores

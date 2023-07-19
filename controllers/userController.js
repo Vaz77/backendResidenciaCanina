@@ -34,12 +34,14 @@ userController.getAllUsers = async (req, res) => {
 
 userController.getUserByDni = async (req, res) => {
   try {
-    const dni = req.params.dni; // Obtener el DNI del usuario de los parámetros de la URL
+    // Obtener el DNI del usuario de los parámetros de la URL
+    const dni = req.params.dni; 
     const user = await User.findOne(
+      // Buscar el usuario por su DNI
       { where: 
         { dni: dni }
       }
-      ); // Buscar el usuario por su DNI
+      ); 
 
     if (!user) {
       // Si no se encuentra el usuario, devolver un mensaje de error
@@ -98,6 +100,30 @@ userController.updateUser = async (req, res) => {
       success: false,
       message: "Could not update user",
       error: error,
+    });
+  }
+};
+
+userController.getProfile = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({
+        message: 'User not found'
+      });
+    }
+    return res.json({
+      name: user.name,
+      surname: user.surname,
+      email: user.email,
+      phone: user.phone,
+      role_id: user.role_id
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Failed to fetch user profile',
+      error: error.message
     });
   }
 };
