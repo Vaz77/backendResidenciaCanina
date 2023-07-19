@@ -72,6 +72,7 @@ authController.login = async (req, res) => {
       {
         userId: userFound.id,
         roleId: userFound.role_id,
+        dogId: userFound.dog_id,
         email: userFound.email,
       },
       //   Va a usar como clave esta palabra. Lo ideal es tener la palabra almacenada en mi archivo .env para mayor privacidad, ya que este secreto es el que va a utilizar la librería para verificar los tokens de usuario que me pasen al navegar.
