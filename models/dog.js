@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
   class Dog extends Model {
     static associate(models) {
       models.Dog.belongsTo(models.User, {
-        foreignKey: "dog_id",
+        foreignKey: "user_id",
       });
       models.Dog.belongsToMany(models.Service, {
         through: "Appointment",

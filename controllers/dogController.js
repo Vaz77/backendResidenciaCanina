@@ -22,4 +22,28 @@ dogController.register = async (req, res) => {
   }
 };
 
+dogController.deleteDog = async (req, res) => {
+    try {
+      const dogId = req.params.id;
+      const dog = await Dog.findByPk(dogId);
+      if (!dog) {
+        return res.status(404).json({
+          success: false,
+          message: "Dog not found",
+        });
+      }
+      await dog.destroy();
+      return res.json({
+        success: true,
+        message: "Dog deleted successfully",
+      });
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: "Could not delete dog",
+        error: error,
+      });
+    }
+  };
+
 module.exports = dogController;
