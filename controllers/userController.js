@@ -32,6 +32,36 @@ userController.getAllUsers = async (req, res) => {
   }
 };
 
+userController.getUserByDni = async (req, res) => {
+  try {
+    const dni = req.params.dni; // Obtener el DNI del usuario de los parámetros de la URL
+    const user = await User.findOne(
+      { where: 
+        { dni: dni }
+      }
+      ); // Buscar el usuario por su DNI
+
+    if (!user) {
+      // Si no se encuentra el usuario, devolver un mensaje de error
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    res.json({
+      message: "User found successfully",
+      data: user,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Could not get user",
+      error: error,
+    });
+  }
+};
+
 userController.updateUser = async (req, res) => {
   try {
     // Recojo los datos del body
