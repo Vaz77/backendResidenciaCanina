@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'user_id',
       });
       models.User.belongsTo(models.Role, {
-        foreignKey: 'user_id',
+        foreignKey: 'role_id',
       });
       
     }
@@ -27,3 +27,4 @@ module.exports = (sequelize, DataTypes) => {
   });
   return User;
 };
+

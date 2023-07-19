@@ -9,6 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'dog_id',
       }); 
       models.Dog.belongsToMany(models.Service, {
+        through: 'Appointment',
         foreignKey: 'dog_id',
       });
     }

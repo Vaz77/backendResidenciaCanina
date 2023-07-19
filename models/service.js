@@ -6,6 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Service extends Model {
     static associate(models) {
       models.Service.belongsToMany(models.Dog, {
+        through: 'Appointment',
         foreignKey: 'service_id',
       });      
     }
