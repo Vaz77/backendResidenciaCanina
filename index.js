@@ -5,11 +5,10 @@ const express = require("express");
 const db = require("./db");
 
 // Importo el router que estoy exportando desde el archivo router.js
-const router = require('./router')
+const router = require("./router");
 
 // Creo mi aplicación a partir de la instanciación de express
 const app = express();
-
 
 // Esto me permite utilizar bodys de tipo JSON - OJO, SIN ESTO NO FUNCIONARÁN LAS PETICIONES DE TIPO POST
 app.use(express.json());
@@ -17,10 +16,8 @@ app.use(express.json());
 // Defino el puerto de conexión
 const PORT = 3000;
 
-
 // Utilizo el router que me estoy importando desde router.js para hacer el enrutado de toda la aplicación
-app.use(router)
-
+app.use(router);
 
 // Si se ha realizado la conexión a la base de datos (que se está realizando en el archivo db.js)
 db.then(() => {
@@ -28,16 +25,7 @@ db.then(() => {
   app.listen(PORT, () => {
     console.log(`Server running in port ${PORT}`);
   });
-})
-  .catch((error) => console.error(error.message));
-
-
-
-
-
-
-
-
+}).catch((error) => console.error(error.message));
 
 //   // El controlador es de tipo POST, para enviar datos, el primer argumento incluye la URL y el segundo la función que va a realizar el controlador en sí
 // app.post("/register", async (req, res) => {
