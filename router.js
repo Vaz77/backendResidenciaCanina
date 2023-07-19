@@ -7,7 +7,7 @@ const userRoutes = require("./views/userRoutes");
 // Enruto utilizando esas rutas que me estoy trayendo desde authRoutes y las paso por la pre-URL /auth. Esto significa que mi URL se estructurará de la siguiente manera:
 // localhost:PORT/auth/... (aquí al final irá la ruta concreta)
 router.use("/auth", authRoutes);
-router.use('/user', userRoutes)
+router.use('/user', userRoutes);
 
 // Exporto las rutas que he creado para poder utilizarlas en el index.js
 module.exports = router;
