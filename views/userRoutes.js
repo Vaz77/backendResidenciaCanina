@@ -8,6 +8,7 @@ router.get("/getAllUsers", userController.getAllUsers);
 router.put("/profile", authMiddleware, userController.updateUser);
 router.get("/getUserByDni/:dni", userController.getUserByDni);
 router.get('/profile/:id', authMiddleware, userController.getProfile);
+router.delete('/profile/:id', userController.deleteProfile);
 
 // Exporto para poder utilizar esto dentro del archivo router.js
 module.exports = router;

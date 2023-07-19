@@ -10,14 +10,11 @@ userController.getAllUsers = async (req, res) => {
     let users = await User.findAll({
       // Si quiero excluir algún campo, lo incluyo aquí
       attributes: {
-        exclude: ["password"]
+        exclude: ["password"],
       },
       // Si quiero incluir los datos de una tabla relacionada, también lo pongo aquí
-      include: [
-        {model: Role}
-      ]
+      include: [{ model: Role }],
     });
-
     // Devuelvo los datos al usuario
     res.json({
       message: "Users found successfully",
@@ -35,14 +32,11 @@ userController.getAllUsers = async (req, res) => {
 userController.getUserByDni = async (req, res) => {
   try {
     // Obtener el DNI del usuario de los parámetros de la URL
-    const dni = req.params.dni; 
+    const dni = req.params.dni;
     const user = await User.findOne(
       // Buscar el usuario por su DNI
-      { where: 
-        { dni: dni }
-      }
-      ); 
-
+      { where: { dni: dni } }
+    );
     if (!user) {
       // Si no se encuentra el usuario, devolver un mensaje de error
       return res.status(404).json({
@@ -50,7 +44,6 @@ userController.getUserByDni = async (req, res) => {
         message: "User not found",
       });
     }
-
     res.json({
       message: "User found successfully",
       data: user,
@@ -110,7 +103,7 @@ userController.getProfile = async (req, res) => {
     const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({
-        message: 'User not found'
+        message: "User not found",
       });
     }
     return res.json({
@@ -118,12 +111,36 @@ userController.getProfile = async (req, res) => {
       surname: user.surname,
       email: user.email,
       phone: user.phone,
-      role_id: user.role_id
+      role_id: user.role_id,
     });
   } catch (error) {
     return res.status(500).json({
-      message: 'Failed to fetch user profile',
-      error: error.message
+      message: "Failed to fetch user profile",
+      error: error.message,
+    });
+  }
+};
+
+userController.deleteProfile = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const user = await User.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+    await user.destroy();
+    return res.json({
+      success: true,
+      message: "User deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Could not delete user",
+      error: error,
     });
   }
 };
