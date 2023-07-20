@@ -76,4 +76,28 @@ serviceController.updateService = async (req, res) => {
   }
 };
 
+serviceController.deleteService = async (req, res) => {
+  try {
+    const serviceId = req.params.id;
+    const service = await Service.findByPk(serviceId);
+    if (!service) {
+      return res.status(404).json({
+        success: false,
+        message: "Service not found",
+      });
+    }
+    await service.destroy();
+    return res.json({
+      success: true,
+      message: "Service deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Could not delete service",
+      error: error,
+    });
+  }
+};
+
 module.exports = serviceController;
