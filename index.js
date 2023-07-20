@@ -1,5 +1,7 @@
 // Recojo express para poder levantar un servidor
+const cors = require('cors');
 const express = require("express");
+
 
 //Recojo la conexion a la base de datos que he hecho en db.js
 const db = require("./db");
@@ -12,6 +14,8 @@ const app = express();
 
 // Esto me permite utilizar bodys de tipo JSON - OJO, SIN ESTO NO FUNCIONARÁN LAS PETICIONES DE TIPO POST
 app.use(express.json());
+
+app.use(cors());
 
 // Defino el puerto de conexión
 const PORT = 3000;

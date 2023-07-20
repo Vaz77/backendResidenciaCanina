@@ -7,6 +7,8 @@ router.post("/", authMiddleware, appointmentController.createAppointment);
 router.get("/getAllAppointments", authMiddleware, isAdmin, appointmentController.getAllAppointments);
 router.put("/update/:id", authMiddleware, appointmentController.updateAppointment);
 router.delete("/delete/:id", authMiddleware, appointmentController.deleteAppointment);
+router.get('/getAppointment/:dogName', appointmentController.getAppointmentByDogName);
+
 
 
 module.exports = router;

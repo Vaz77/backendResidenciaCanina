@@ -1,4 +1,4 @@
-const { Appointment } = require("../models");
+const { Appointment, Dog } = require("../models");
 
 const appointmentController = {};
 const isActive = true;
@@ -11,6 +11,7 @@ appointmentController.createAppointment = async (req, res) => {
       date: body.date,
       observations: body.observations,
       dog_id: body.dog_id,
+      doge_name: params.dog_name,
       service_id: body.service_id,
     });
     return res.json({
@@ -111,4 +112,44 @@ appointmentController.deleteAppointment = async (req, res) => {
   }
 };
 
+appointmentController.getAppointmentByDogName = async (req, res) => {
+  try {
+    const dogName = req.params.dogName;
+    // Buscar el perro por su nombre
+    const dog = await Dog.findOne({
+      where: {
+        name: dogName,
+      },
+    });
+    if (!dog) {
+      return res.status(404).json({
+        success: false,
+        message: "Dog not found",
+      });
+    }
+    // Buscar las citas asociadas al perro por su id
+    const appointments = await Appointment.findAll({
+      where: {
+        dog_id: dog.id,
+      },
+    });
+    if (appointments.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No appointments found for the dog",
+      });
+    }
+    return res.json({
+      success: true,
+      message: "Appointments found successfully",
+      data: appointments,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error finding appointments",
+      error: error,
+    });
+  }
+};
 module.exports = appointmentController;

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
     date: DataTypes.DATE,
     observations: DataTypes.STRING,
     dog_id: DataTypes.INTEGER,
+    dog_name: DataTypes.STRING,
     service_id: DataTypes.INTEGER
   }, {
     sequelize,
