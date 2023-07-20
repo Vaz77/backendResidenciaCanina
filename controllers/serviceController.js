@@ -35,4 +35,45 @@ serviceController.getAllServices = async (req, res) => {
   }
 };
 
+serviceController.updateService = async (req, res) => {
+  try {
+    // Recojo los datos del body
+    const body = req.body;
+    const serviceId = req.params.id;
+    const service = await Service.findOne({
+      where: {
+        id: serviceId,
+      },
+    });
+
+    if (!service) {
+      return res.status(404).json({
+        success: false,
+        message: "service not found",
+      });
+    }
+    await Service.update(
+      {
+        name: body.name,
+        price: body.price,
+        description: body.description,
+      },
+      {
+        where: {
+          id: serviceId,
+        },
+      }
+    );
+    res.json({
+      message: "service updated",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Could not update service",
+      error: error,
+    });
+  }
+};
+
 module.exports = serviceController;
