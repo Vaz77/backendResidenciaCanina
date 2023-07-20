@@ -9,7 +9,6 @@ serviceController.register = async (req, res) => {
       name: body.name,
       price: body.price,
       description: body.description,
-      appointment_id: body.appointmentId,
     });
     return res.json({
       message: "Servicio creado",
@@ -17,6 +16,22 @@ serviceController.register = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
+  }
+};
+
+serviceController.getAllServices = async (req, res) => {
+  try {
+    let services = await Service.findAll({});
+    res.json({
+      message: "Services found successfully",
+      data: services,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Services not found",
+      error: error,
+    });
   }
 };
 
