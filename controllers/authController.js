@@ -27,7 +27,6 @@ authController.register = async (req, res) => {
       //   Le asigno directamente el rol de usuario, no quiero que se puedan registrar administradores
       role_id: 2,
     });
-
     // Devuelvo como respuesta un mensaje y los datos del usuario nuevo que acabo de crear, que había almacenado en la variable "newUser"
     return res.json({
       message: "Usuario creado",

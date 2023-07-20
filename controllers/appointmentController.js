@@ -62,6 +62,7 @@ appointmentController.updateAppointment = async (req, res) => {
         date: body.date,
         observations: body.observations,
         service_id: body.service_id,
+        dog_id: body.dog_id,
       },
       {
         where: {
