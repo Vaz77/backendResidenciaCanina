@@ -18,8 +18,11 @@ module.exports = {
       status: {
         type: Sequelize.STRING
       },
+      time: {
+        type: Sequelize.STRING,
+      },
       date: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
       },
       observations: {
         type: Sequelize.STRING

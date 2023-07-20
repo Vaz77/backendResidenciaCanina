@@ -5,10 +5,23 @@ const isActive = true;
 appointmentController.createAppointment = async (req, res) => {
   let body = req.body;
   try {
+    const existingAppointment = await Appointment.findOne({
+      where: {
+        date: body.date,
+        time: body.time,
+      },
+    });
+
+    if (existingAppointment) {
+      return res.status(409).json({
+        success: false,
+        message: "The appointment slot is already taken.",
+      });
+    }
     const newAppointment = await Appointment.create({
-      time: body.time,
       status: isActive,
       date: body.date,
+      time: body.time,
       observations: body.observations,
       dog_id: body.dog_id,
       dog_name: body.dog_name,
