@@ -10,7 +10,7 @@ appointmentController.createAppointment = async (req, res) => {
       status: isActive,
       date: body.date,
       observations: body.observations,
-      dog_id: body.dogId,
+      dog_id: body.dog_id,
       service_id: body.service_id,
     });
     return res.json({
@@ -61,7 +61,7 @@ appointmentController.updateAppointment = async (req, res) => {
         status: body.status,
         date: body.date,
         observations: body.observations,
-        service_id: req.params.id,
+        service_id: body.service_id,
       },
       {
         where: {
@@ -76,6 +76,35 @@ appointmentController.updateAppointment = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Could not update appointment",
+      error: error,
+    });
+  }
+};
+
+appointmentController.deleteAppointment = async (req, res) => {
+  try {
+    const dogId = req.params.id;
+    const appointment = await Appointment.findOne({
+      where: {
+        dog_id: dogId,
+      },
+    });
+    if (!appointment) {
+      return res.status(404).json({
+        success: false,
+        message: "Appointment not found",
+      });
+    }
+
+    await appointment.destroy();
+    return res.json({
+      success: true,
+      message: "Appointment deleted successfully",
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Could not delete appointment",
       error: error,
     });
   }
