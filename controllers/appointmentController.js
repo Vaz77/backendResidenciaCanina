@@ -11,7 +11,8 @@ appointmentController.createAppointment = async (req, res) => {
       date: body.date,
       observations: body.observations,
       dog_id: body.dog_id,
-      doge_name: params.dog_name,
+      dog_name: body.dog_name,
+      duration: body.duration,
       service_id: body.service_id,
     });
     return res.json({
@@ -85,11 +86,7 @@ appointmentController.updateAppointment = async (req, res) => {
 
 appointmentController.deleteAppointment = async (req, res) => {
   try {
-    const dogId = req.params.id;
     const appointment = await Appointment.findOne({
-      where: {
-        dog_id: dogId,
-      },
     });
     if (!appointment) {
       return res.status(404).json({

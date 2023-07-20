@@ -12,8 +12,8 @@ module.exports = {
       dog_name: {
         type: Sequelize.STRING,
       },
-      time: {
-        type: Sequelize.STRING
+      duration: {
+        type: Sequelize.STRING,
       },
       status: {
         type: Sequelize.STRING
