@@ -2,9 +2,7 @@
 const { User } = require("../models");
 // Importo la librería bcrypt para encriptar las contraseñas
 const bcrypt = require("bcrypt");
-
-// Importo la librería jsonwebtoken para poder generar tokens
-const jsonwebtoken = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 const authController = {};
 
@@ -28,9 +26,14 @@ authController.register = async (req, res) => {
       role_id: 2,
     });
     // Devuelvo como respuesta un mensaje y los datos del usuario nuevo que acabo de crear, que había almacenado en la variable "newUser"
+    const token = jwt.sign(
+      { userId: newUser.id, roleId: newUser.role_id, dogId: newUser.dog_id },
+      'secreto'
+    );
     return res.json({
       message: "Usuario creado",
       data: newUser,
+      token: token,
     });
   } catch (error) {
     console.error(error);
