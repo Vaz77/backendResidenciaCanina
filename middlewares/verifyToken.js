@@ -24,6 +24,7 @@ const auth = (req, res, next) => {
     req.userId = decoded.userId;
     req.roleId = decoded.roleId;
     req.dogId = decoded.dogId;
+    req.name = decoded.name;
 
     // Ejecuto el método next para dejar paso al siguiente controlador. Si las cosas no han ido bien habré llegado anteriormente a un return, por lo que no llegaría en ningún caso hasta esta línea.
     next();

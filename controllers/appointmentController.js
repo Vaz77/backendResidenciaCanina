@@ -1,7 +1,6 @@
 const { Appointment, Dog } = require("../models");
 
 const appointmentController = {};
-const isActive = true;
 appointmentController.createAppointment = async (req, res) => {
   let body = req.body;
   try {
@@ -18,8 +17,8 @@ appointmentController.createAppointment = async (req, res) => {
         message: "The appointment slot is already taken.",
       });
     }
+    
     const newAppointment = await Appointment.create({
-      status: isActive,
       date: body.date,
       time: body.time,
       observations: body.observations,
@@ -28,8 +27,9 @@ appointmentController.createAppointment = async (req, res) => {
       duration: body.duration,
       service_id: body.service_id,
     });
-    return res.json({
-      message: "Reserva creada",
+    return res.status(201).json({
+      success: true,
+      message: "Reserva creada exitosamente",
       data: newAppointment,
     });
   } catch (error) {
@@ -99,7 +99,9 @@ appointmentController.updateAppointment = async (req, res) => {
 
 appointmentController.deleteAppointment = async (req, res) => {
   try {
+    const { id } = req.params;
     const appointment = await Appointment.findOne({
+      where: { id },
     });
     if (!appointment) {
       return res.status(404).json({
@@ -162,4 +164,48 @@ appointmentController.getAppointmentByDogName = async (req, res) => {
     });
   }
 };
+
+appointmentController.getAppointmentByDogId = async (req, res) => {
+  try {
+    const dogId = req.params.dogId;
+    const dog = await Dog.findOne({
+      where: {
+        id: dogId,
+      },
+    });
+    if (!dog) {
+      return res.status(404).json({
+        success: false,
+        message: "Dog not found",
+      });
+    }
+    const appointments = await Appointment.findAll({
+      where: {
+        dog_id: dog.id,
+      },
+    });
+    if (appointments.length === 0) {
+      return res.status(404).json({
+        success: false,
+        message: "No appointments found for the dog",
+      });
+    }
+    return res.json({
+      success: true,
+      message: "Appointments found successfully",
+      data: appointments,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Error finding appointments",
+      error: error,
+    });
+  }
+};
+
+
+
+
+
 module.exports = appointmentController;

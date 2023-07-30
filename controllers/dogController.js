@@ -51,15 +51,13 @@ dogController.updateDog = async (req, res) => {
     // Recojo los datos del body
     const body = req.body;
     const dogId = req.params.id;
-    const userId = req.userId;
 
-    delete body.name;
-    delete body.breed;
+    // No es necesario eliminar las propiedades name y breed del objeto body
+
     // Utilizo el método findOne para asegurarme de que el perro que se va a actualizar pertenece al usuario que está realizando la solicitud.
     const dog = await Dog.findOne({
       where: {
         id: dogId,
-        user_id: userId,
       },
     });
 
@@ -71,6 +69,8 @@ dogController.updateDog = async (req, res) => {
     }
     await Dog.update(
       {
+        name: body.name, // Agregar name nuevamente aquí si es necesario actualizarlo
+        breed: body.breed, // Agregar breed nuevamente aquí si es necesario actualizarlo
         age: body.age,
         wheight: body.wheight,
         pathologies: body.pathologies,
@@ -78,7 +78,6 @@ dogController.updateDog = async (req, res) => {
       {
         where: {
           id: dogId,
-          user_id: userId,
         },
       }
     );

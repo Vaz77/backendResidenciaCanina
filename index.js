@@ -11,11 +11,25 @@ const router = require("./router");
 
 // Creo mi aplicación a partir de la instanciación de express
 const app = express();
+app.use(cors());
 
+let corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  preflightContinue: false,
+  // allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization",
+  optionsSuccessStatus: 204
+};
+
+app.use(cors(corsOptions));
 // Esto me permite utilizar bodys de tipo JSON - OJO, SIN ESTO NO FUNCIONARÁN LAS PETICIONES DE TIPO POST
 app.use(express.json());
 
-app.use(cors());
+
+
+
+
 
 // Defino el puerto de conexión
 const PORT = 3000;

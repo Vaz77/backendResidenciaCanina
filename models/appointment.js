@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     observations: DataTypes.STRING,
     dog_id: DataTypes.INTEGER,
     dog_name: DataTypes.STRING,
-    service_id: DataTypes.INTEGER
+    service_id: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Appointment',
