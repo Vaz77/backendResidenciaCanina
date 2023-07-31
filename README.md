@@ -41,7 +41,44 @@ Esta API ha sido desarrollada por **Jesús Vázquez Muñoz**, como parte del pro
 
 ## Endpoints
 
-El proyecto actualmente se encuentra en desarrollo y los siguientes endpoints han sido implementados y probados con éxito:
+Actualmente los siguientes endpoints han sido implementados y probados con éxito:
+
+#### Endpoints relacionados con Appointments:
+
+- POST /appointment - Crear una cita.
+- GET /appointment/getAllAppointments - Obtener todas las citas.
+- PUT /appointment/update/:id - Actualizar una cita por su ID.
+- DELETE /appointment/delete/:id - Eliminar una cita por su ID.
+- GET /appointment/getAppointment/:dogName - Obtener una cita por el nombre del perro.
+- GET /appointment/dog/:dogId - Obtener una cita por el ID del perro.
+
+#### Endpoints relacionados con Auth (Autenticación y Registro):
+
+- POST /auth/register - Registrar un nuevo usuario.
+- POST /auth/login - Iniciar sesión.
+
+#### Endpoints relacionados con Dogs:
+
+- POST /dog/register - Registrar un nuevo perro.
+- DELETE /dog/delete/:id - Eliminar un perro por su ID.
+- PUT /dog/profile/:id - Actualizar los detalles de un perro por su ID.
+- GET /dog/getAllDogs - Obtener todos los perros.
+- GET /dog/getAllDogsByUserId - Obtener todos los perros asociados a un usuario.
+
+#### Endpoints relacionados con Services:
+
+- POST /service/register - Registrar un nuevo servicio.
+- GET /service/getAllServices - Obtener todos los servicios.
+- PUT /service/update/:id - Actualizar un servicio por su ID.
+- DELETE /service/delete/:id - Eliminar un servicio por su ID.
+
+#### Endpoints relacionados con Users:
+
+- GET /user/getAllUsers - Obtener todos los usuarios.
+- PUT /user/profile/:id - Actualizar los detalles del perfil de un usuario por su ID.
+- GET /user/getUserByDni/:dni - Obtener un usuario por su DNI.
+- GET /user/profile/:id - Obtener el perfil de un usuario por su ID.
+- DELETE /user/profile/:id - Eliminar el perfil de un usuario por su ID.
 
 
 ## Contribuciones
@@ -66,3 +103,11 @@ Puedes hacerlo de dos maneras:
     - Abre una solicitud de Pull Request
 
 ## Agradecimientos
+- **Dani**  
+<a href="https://github.com/Datata" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a>
+
+- **Mara**  
+<a href="https://github.com/MaraScampini" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a>
+
+- **David**  
+<a href="https://www.github.com/Dave86dev" target="_blank"><img src="https://img.shields.io/badge/github-24292F?style=for-the-badge&logo=github&logoColor=red" target="_blank"></a>
