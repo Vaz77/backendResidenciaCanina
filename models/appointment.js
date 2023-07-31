@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
     dog_id: DataTypes.INTEGER,
     dog_name: DataTypes.STRING,
     service_id: DataTypes.INTEGER,
+    service_name: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Appointment',

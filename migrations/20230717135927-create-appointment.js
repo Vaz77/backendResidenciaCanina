@@ -27,6 +27,9 @@ module.exports = {
       observations: {
         type: Sequelize.STRING
       },
+      service_name: {
+        type: Sequelize.STRING
+      },
       dog_id: {
         type: Sequelize.INTEGER,
         references:{

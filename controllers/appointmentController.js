@@ -10,14 +10,12 @@ appointmentController.createAppointment = async (req, res) => {
         time: body.time,
       },
     });
-
     if (existingAppointment) {
       return res.status(409).json({
         success: false,
         message: "The appointment slot is already taken.",
       });
     }
-    
     const newAppointment = await Appointment.create({
       date: body.date,
       time: body.time,
@@ -26,6 +24,7 @@ appointmentController.createAppointment = async (req, res) => {
       dog_name: body.dog_name,
       duration: body.duration,
       service_id: body.service_id,
+      service_name: body.service_name,
     });
     return res.status(201).json({
       success: true,
@@ -203,9 +202,5 @@ appointmentController.getAppointmentByDogId = async (req, res) => {
     });
   }
 };
-
-
-
-
 
 module.exports = appointmentController;
