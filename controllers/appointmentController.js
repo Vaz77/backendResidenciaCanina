@@ -1,29 +1,26 @@
-const { Appointment, Dog } = require("../models");
+const { Appointment, Dog, Service } = require("../models");
 
 const appointmentController = {};
+
 appointmentController.createAppointment = async (req, res) => {
   let body = req.body;
   try {
-    const existingAppointment = await Appointment.findOne({
-      where: {
-        date: body.date,
-        time: body.time,
-      },
+    const [dog, createdDog] = await Dog.findOrCreate({
+      where: { dog_name: body.dog_name },
+      defaults: { dog_name: body.dog_name, user_id: req.userId },
     });
-    if (existingAppointment) {
-      return res.status(409).json({
-        success: false,
-        message: "The appointment slot is already taken.",
-      });
-    }
+    const [service, createdService] = await Service.findOrCreate({
+      where: { service_name: body.service_name },
+      defaults: { service_name: body.service_name },
+    });
     const newAppointment = await Appointment.create({
-      date: body.date,
-      time: body.time,
-      observations: body.observations,
-      dog_id: body.dog_id,
-      dog_name: body.dog_name,
       duration: body.duration,
-      service_id: body.service_id,
+      time: body.time,
+      date: body.date,
+      observations: body.observations,
+      dog_id: dog.id,
+      dog_name: body.dog_name,
+      service_id: service.id,
       service_name: body.service_name,
     });
     return res.status(201).json({
@@ -32,7 +29,12 @@ appointmentController.createAppointment = async (req, res) => {
       data: newAppointment,
     });
   } catch (error) {
-    console.error(error);
+    console.error("Error al crear la cita:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Error al crear la cita",
+      error: error.message,
+    });
   }
 };
 

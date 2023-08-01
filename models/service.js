@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Service.init(
     {
-      name: DataTypes.STRING,
+      service_name: DataTypes.STRING,
       price: DataTypes.STRING,
       description: DataTypes.STRING,
     },
