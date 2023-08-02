@@ -2,7 +2,7 @@
 const config = require("./config/config.json");
 // Instancio sequelize para poder hacer la conexión con la BBDD y trabajar sobre ella
 const { Sequelize } = require("sequelize");
-
+const mysql2 = require("mysql2")
 // Coloco las credenciales provenientes del .env o de config, dependiendo de si tenemos un archivo .env o no.
 const sequelize = new Sequelize(
   process.env.MYSQL_DATABASE || config.development.database,
@@ -11,8 +11,9 @@ const sequelize = new Sequelize(
   // Tenemos que crear un objeto aparte porque estas opciones se colocan en un objeto de parámetros opcionales
   {
     host: process.env.MYSQL_HOST || config.development.host,
-    port: process.env.MYSQL_PORT || config.development.port || "3306",
+    port: process.env.MYSQL_PORT || config.development.port,
     dialect: "mysql",
+    dialectModule: mysql2,
     operatorAliases: false,
     pool: {
       max: 5, //maximum number of connection in pool
@@ -26,6 +27,6 @@ const sequelize = new Sequelize(
 // Exportamos la instanciación que hemos hecho de sequelize y ejecutamos el método authenticate para que nos autentique en la base de datos
 module.exports = sequelize.authenticate().then((db) => {
   // Aviso de que he conectado y me devuelvo esa conexión a la BBDD
-  console.log("MYSQL connected");
+  console.log(`MYSQL connected on port ${config.development.port}`);
   return db;
 });
