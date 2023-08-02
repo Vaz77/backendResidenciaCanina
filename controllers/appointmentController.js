@@ -16,6 +16,7 @@ appointmentController.createAppointment = async (req, res) => {
     const newAppointment = await Appointment.create({
       duration: body.duration,
       time: body.time,
+      date_exit: body.date_exit,
       date: body.date,
       observations: body.observations,
       dog_id: dog.id,
@@ -202,6 +203,28 @@ appointmentController.getAppointmentByDogId = async (req, res) => {
       message: "Error finding appointments",
       error: error,
     });
+  }
+};
+
+appointmentController.getAppointmentsByEmail = async (req, res) => {
+  const { email } = req.params;
+  try {
+    const appointments = await Appointment.findAll({ email });
+    if (!appointments || appointments.length === 0) {
+      return res
+        .status(404)
+        .json({
+          message: "No se encontraron citas para este correo electrónico.",
+        });
+    }
+    return res.json(appointments);
+  } catch (error) {
+    console.error("Error al obtener las citas:", error);
+    return res
+      .status(500)
+      .json({
+        message: "Error al obtener las citas. Por favor, inténtalo nuevamente.",
+      });
   }
 };
 

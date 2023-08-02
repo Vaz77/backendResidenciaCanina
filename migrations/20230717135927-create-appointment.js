@@ -1,61 +1,61 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Appointments', {
+    await queryInterface.createTable("Appointments", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       dog_name: {
         type: Sequelize.STRING,
-      },
-      duration: {
-        type: Sequelize.STRING,
-      },
-      status: {
-        type: Sequelize.STRING
       },
       time: {
         type: Sequelize.STRING,
       },
       date: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+      },
+      date_exit: {
+        type: Sequelize.STRING,
+      },
+      duration: {
+        type: Sequelize.STRING,
       },
       observations: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       service_name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
       },
       dog_id: {
         type: Sequelize.INTEGER,
-        references:{
+        references: {
           model: "Dogs",
-          key: "id"
-        }
+          key: "id",
+        },
       },
       service_id: {
         type: Sequelize.INTEGER,
         primaryKey: true,
         references: {
-          model: 'Services',
-          key: 'id',
+          model: "Services",
+          key: "id",
         },
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Appointments');
-  }
+    await queryInterface.dropTable("Appointments");
+  },
 };
