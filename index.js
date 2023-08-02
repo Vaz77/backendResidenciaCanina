@@ -26,7 +26,9 @@ app.use(cors(corsOptions));
 // Esto me permite utilizar bodys de tipo JSON - OJO, SIN ESTO NO FUNCIONARÁN LAS PETICIONES DE TIPO POST
 app.use(express.json());
 
-
+app.get('/health', (req, res) => {
+  return res.send('healthy');
+});
 
 
 
