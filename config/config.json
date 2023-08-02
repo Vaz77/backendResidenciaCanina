@@ -1,11 +1,11 @@
 {
   "development": {
     "username": "root",
-    "password": "root",
-    "database": "residenciaCanina",
-    "host": "127.0.0.1",
+    "password": "gX2x1MkRd0reCRYG1Zqs",
+    "database": "railway",
+    "host": "containers-us-west-96.railway.app",
     "dialect": "mysql",
-    "port":3306
+    "port":6678
   },
   "test": {
     "username": "root",
