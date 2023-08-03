@@ -10,6 +10,7 @@ router.delete("/delete/:id", appointmentController.deleteAppointment);
 router.get('/getAppointment/:dogName', appointmentController.getAppointmentByDogName);
 router.get("/appointment/dog/:dogId", appointmentController.getAppointmentByDogId);
 router.get("/getAppointmentsByEmail/:email", authMiddleware, appointmentController.getAppointmentsByEmail);
+router.get("/getUserAppointments", authMiddleware, appointmentController.getUserAppointments)
 
 
 

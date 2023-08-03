@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
       models.Appointment.belongsTo(models.Service, {
         foreignKey: "service_id",
       });
+      models.Appointment.belongsTo(models.User, {
+        foreignKey: "user_id",
+      });
     }
   }
   Appointment.init(
@@ -22,6 +25,7 @@ module.exports = (sequelize, DataTypes) => {
       dog_name: DataTypes.STRING,
       service_id: DataTypes.INTEGER,
       service_name: DataTypes.STRING,
+      user_id: DataTypes.INTEGER
     },
     {
       sequelize,
