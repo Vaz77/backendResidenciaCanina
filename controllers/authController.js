@@ -54,7 +54,7 @@ authController.login = async (req, res) => {
     if (!user) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password",
+        message: "Invalid email or password 1",
       });
     }
     // Si todo ha ido bien por ahora, cojo la contraseña que me están pasando por el body y utilizo el método de comparar de bcrypt para comprobar que la contraseña que me están pasando, al hashearla, coincide con la contraseña hasheada que tengo en la base de datos. Paso como argumentos primero la contraseña que estoy cogiendo del body (recordemos que está desestructurada), y después la contraseña que figura en base de datos del usuario que hemos encontrado
@@ -64,7 +64,7 @@ authController.login = async (req, res) => {
     if (!correctPassword) {
       return res.status(401).json({
         success: false,
-        message: "Invalid email or password"
+        message: "Invalid email or password 2"
       });
     }
 
