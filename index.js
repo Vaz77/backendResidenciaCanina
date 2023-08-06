@@ -1,5 +1,5 @@
 // Recojo express para poder levantar un servidor
-// const cors = require('cors');
+const cors = require('cors');
 const express = require("express");
 
 
@@ -11,18 +11,18 @@ const router = require("./router");
 
 // Creo mi aplicación a partir de la instanciación de express
 const app = express();
-// app.use(cors());
+app.use(cors());
 
-// let corsOptions = {
-//   origin: "*",
-//   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-//   // methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-//   preflightContinue: false,
-//   // allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization",
-//   optionsSuccessStatus: 204
-// };
+let corsOptions = {
+  origin: "*",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  // methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+  preflightContinue: false,
+  // allowedHeaders: "Origin,X-Requested-With,Content-Type,Accept,Authorization",
+  optionsSuccessStatus: 204
+};
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 // Esto me permite utilizar bodys de tipo JSON - OJO, SIN ESTO NO FUNCIONARÁN LAS PETICIONES DE TIPO POST
 app.use(express.json());
 
