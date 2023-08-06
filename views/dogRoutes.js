@@ -4,7 +4,7 @@ const isAdmin = require("../middlewares/isAdmin");
 const auth = require("../middlewares/verifyToken");
 const authMiddleware = require("../middlewares/verifyToken");
 
-router.post("/register", authMiddleware, isAdmin, dogController.register);
+router.post("/register", dogController.register);
 router.delete("/delete/:id", authMiddleware, isAdmin, dogController.deleteDog);
 router.put("/profile/:id", dogController.updateDog);
 router.get("/getAllDogs", authMiddleware, isAdmin, dogController.getAlldogs);

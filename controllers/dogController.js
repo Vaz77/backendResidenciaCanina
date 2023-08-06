@@ -1,17 +1,24 @@
-const { Dog } = require("../models");
+const { Dog, User } = require("../models");
 
 const dogController = {};
 
 dogController.register = async (req, res) => {
-  let body = req.body;
+  const { userDni } = req.body;
+  console.log("userDni:", userDni);
+
   try {
+    const user = await User.findOne({ where: { dni: userDni } });
+    if (!user) {
+      return res.status(404).json({ message: "Cliente no encontrado" });
+    }
     const newDog = await Dog.create({
-      name: body.name,
-      breed: body.breed,
-      age: body.age,
-      wheight: body.wheight,
-      pathologies: body.pathologies,
-      user_id: body.userId,
+      dog_name: req.body.dog_name,
+      breed: req.body.breed,
+      age: req.body.age,
+      wheight: req.body.wheight,
+      pathologies: req.body.pathologies,
+      user_id: user.id,
+      user_dni: req.body.userDni,
     });
     return res.json({
       message: "Perro creado",

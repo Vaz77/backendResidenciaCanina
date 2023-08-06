@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       wheight: DataTypes.STRING,
       pathologies: DataTypes.STRING,
       user_id: DataTypes.INTEGER,
+      user_dni: DataTypes.STRING,
     },
     {
       sequelize,

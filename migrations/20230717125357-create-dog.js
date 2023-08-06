@@ -24,6 +24,9 @@ module.exports = {
       pathologies: {
         type: Sequelize.STRING,
       },
+      user_dni: {
+        type: Sequelize.STRING,
+      },
       user_id: {
         type: Sequelize.INTEGER,
         references: {
