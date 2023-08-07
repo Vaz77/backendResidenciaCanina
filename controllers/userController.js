@@ -44,7 +44,7 @@ userController.getUserByDni = async (req, res) => {
 userController.updateUser = async (req, res) => {
   try {
     const body = req.body;
-    const userId = req.params.id;
+    const { userId } = req;
     const user = await User.findOne({
       where: {
         id: userId,
@@ -56,15 +56,20 @@ userController.updateUser = async (req, res) => {
         message: "User not found",
       });
     }
-    await user.update({
+    const updatedUser = await user.update({
       name: body.name,
       surname: body.surname,
       email: body.email,
       dni: body.dni,
       phone: body.phone,
     });
-    res.json({
-      message: "User updated",
+    return res.json({
+      name: updatedUser.name,
+      surname: updatedUser.surname,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      role_id: updatedUser.role_id,
+      id: updatedUser.id
     });
   } catch (error) {
     return res.status(500).json({
@@ -77,7 +82,7 @@ userController.updateUser = async (req, res) => {
 
 userController.getProfile = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.params.id;
     const user = await User.findByPk(userId);
     if (!user) {
       return res.status(404).json({
@@ -90,6 +95,7 @@ userController.getProfile = async (req, res) => {
       email: user.email,
       phone: user.phone,
       role_id: user.role_id,
+      id: user.id
     });
   } catch (error) {
     return res.status(500).json({

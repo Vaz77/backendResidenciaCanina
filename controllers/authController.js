@@ -41,8 +41,6 @@ authController.login = async (req, res) => {
   try {
     // Desestructuro el body, como sé que solo voy a tener los campos email y password, los cojo ya directamente
     const { email, password } = req.body;
-        console.log("Email recibido:", email);
-    console.log("Contraseña recibida:", password);
     // Para poder hacer el login, primero tengo que encontrar un usuario que coincida con el email que me están pasando. Para eso envío una query de tipo findOne (encuentra uno) al modelo de usuarios, que buscará dentro de la tabla de usuarios.
     const user = await User.findOne({
       where: {
